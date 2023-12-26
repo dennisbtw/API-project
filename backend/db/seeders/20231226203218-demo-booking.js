@@ -40,7 +40,7 @@ module.exports = {
         userId: 5,
         startDate: '2027-12-26',
         endDate: '2028-3-10' 
-      },
+      }
     ], { validate: true})
   },
 
