@@ -36,7 +36,7 @@ module.exports = {
         spotId:5,
         url: 'URL',
         preview: true
-      },
+      }
     ], { validate: true });
   },
 
