@@ -70,14 +70,14 @@ module.exports = {
       name: 'Forest Hideaway',
       description: "It's a perfect retreat for those seeking a peaceful escape amidst the wonders of the natural world.",
       price: 70
-    },
+    }
    ], {validate: true});
   },
 
   async down (queryInterface, Sequelize) {
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
-      ownerId: { [Op.in]: [1 ,2 ,3 ,4 ,5]}
+      ownerId: { [Op.in]: [1, 2, 3, 4, 5]}
     }, {});
   }
 };
