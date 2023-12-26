@@ -70,7 +70,7 @@ module.exports = {
       name: 'Forest Hideaway',
       description: "It's a perfect retreat for those seeking a peaceful escape amidst the wonders of the natural world.",
       price: 70
-    },
+    }
    ], {validate: true});
   },
 
