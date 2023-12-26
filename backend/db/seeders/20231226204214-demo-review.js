@@ -38,7 +38,7 @@ module.exports = {
         userId: 5,
         review: "Almost perfect",
         stars: 4
-      },
+      }
     ], {validate: true})
   },
 
