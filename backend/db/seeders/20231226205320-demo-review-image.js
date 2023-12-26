@@ -28,7 +28,7 @@ module.exports = {
       {
         reviewId: 5,
         url: 'image url'
-      },
+      }
     ], {validate: true})
   },
 
