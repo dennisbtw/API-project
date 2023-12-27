@@ -20,7 +20,7 @@ module.exports = {
       lat: 41.13982,
       lng: -81.65958,
       name: "goat house",
-      description: "this where THE LeBron Raymone James Sr. grew up",
+      description: "this where THE LeBron Raymone James Sr. grew up.",
       price: 23
     },
     {
@@ -32,7 +32,7 @@ module.exports = {
       lat: 35.6895,
       lng: 139.6917,
       name: "Cozy Countryside Retreat",
-      description: 'This Cozy Countryside Retreat offers a charming and whimsical getaway',
+      description: 'This Cozy Countryside Retreat offers a charming and whimsical getaway.',
       price: 85 
     },
     {
