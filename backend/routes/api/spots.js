@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, User, Review } = require('../../db/models');
-
+const { validateSpot } = require('../../utils/validation')
 const { Op } = require('sequelize');
 
 
@@ -38,7 +38,7 @@ router.get('/', async (req, res, next) => {
 
 // get all spots owned by the current user
 
-router.get('/current', async (req, res, next) => {
+router.get('/current', requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const spots = await Spot.findAll({
         where: {
@@ -80,15 +80,15 @@ router.get('/:spotId', async(req, res, next) => {
     });
     let totalStarRating = 0;
     reviews.forEach(review => {
-        totalStarRating += review.starRating;
+        totalStarRating += review.stars;
     });
 
     const numReviews = reviews.length;
     let avgStarRating;
 
-    if(numReviews > 0) {
+    if(numReviews) {
         avgStarRating = totalStarRating / numReviews;
-    }
+    } 
     const detail = {
         ...spot.toJSON(), 
         avgStarRating,
@@ -97,4 +97,44 @@ router.get('/:spotId', async(req, res, next) => {
     res.json(detail)
 });
 
-module.exports = router;
+// create a spot
+
+router.post('/', requireAuth, validateSpot, async(req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { user } = req;
+
+    const postSpot = await Spot.create ({
+        ownerId: user.id,
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    });
+    res.status(201).json(postSpot);
+});
+
+// add an image to a spot based on the spot's id
+
+
+
+
+// router.post('/:spotId/images', userAuthentication, userAuthorization, async(req, res, next) => {
+//     const newImage = {}
+//     const { spotId } = req.params;
+//     const { url, preview } = req.body;
+//     const spotImage = await SpotImage.create({spotId, url, preview});
+
+//     newImage.id = spotImage.id;
+//     newImage.url = url;
+//     newImage.preview = preview;
+
+//     res.json(newImage);
+// });
+
+
+module.exports = router; 
