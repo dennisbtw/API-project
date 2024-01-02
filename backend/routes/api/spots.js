@@ -5,31 +5,27 @@ const { Spot, SpotImage, User, Review } = require('../../db/models');
 const { validateSpot } = require('../../utils/validation')
 const { Op } = require('sequelize');
 
-
+// fix userAuthentication and userAuthorization
 const userAuthentication = async (req, res, next) => {
-    const { user } = req;
-    if (user) {
+    if (req.user) {
         next()
     } else {
-        return res.status(401).json({
-            'message': 'Authentication required'
-        });
+        res.status(401).send({ message: "Authentication required"});
     }
 }
 
 const userAuthorization = async (req, res, next) => {
-    const { spotId } = req.params;
-    const { user } = req;
+    const spotId = req.params.spotId;
+    const user = req.user;
 
     const spot = await Spot.findByPk(spotId);
-    if(spot) {
-        if(spot.ownerId == user.id) {
-            next()
-        } else {
-            return res.status(403).json({"message": "Forbidden"})}
-        } else {
-            return res.status(404).json({"message": "Spot couldn't be found"})}
-        }
+    if(!spot){
+        return res.status(404).json({ message: "Spot not found" });
+    }
+    if(spot.ownerId !== user.id) {
+        return res.status(403).json({ message: "Forbidden" });
+    }
+}
 
 // get all spots
 
