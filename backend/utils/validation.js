@@ -63,7 +63,7 @@ const validateSpotExists = async (req, res, next) => {
   const spot = await Spot.findByPk(spotId);
 
   if(!spot) {
-    return res.status(400).json({ "message": "Spot couldn't be found" });
+    return res.status(404).json({ "message": "Spot couldn't be found" });
   }
   next();
 };

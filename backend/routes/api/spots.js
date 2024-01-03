@@ -12,7 +12,7 @@ const userAuthentication = async (req, res, next) => {
         res.status(401).send({ message: "Authentication required"});
     }
 }
-
+ 
 const userAuthorization = async (req, res, next) => {
     const { spotId } = req.params;
     const { user } = req;
@@ -247,7 +247,8 @@ router.delete('/:spotId', requireAuth, userAuthentication, userAuthorization, as
 });
 
 // Get all Reviews by a Spot's id
-// refactor this but working
+// working
+
 
 router.get('/:spotId/reviews', validateSpotExists, async (req, res, next) => {
     const { spotId } = req.params;
@@ -271,7 +272,7 @@ router.get('/:spotId/reviews', validateSpotExists, async (req, res, next) => {
 })
 
 // create a review for a spot based on the spot's id
-// not working
+// working
 
 router.post('/:spotId/reviews', userAuthentication, validateSpotExists, validateReview, async (req, res)=> {
     const { review, stars } = req.body;
@@ -292,5 +293,7 @@ router.post('/:spotId/reviews', userAuthentication, validateSpotExists, validate
 
     return res.status(201).json(newReview)
 })
+
+
 
 module.exports = router; 
