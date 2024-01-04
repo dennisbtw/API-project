@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, User, Review, ReviewImage } = require('../../db/models');
-const { validateSpot, validateSpotExists, validateReview} = require('../../utils/validation')
+const { Spot, SpotImage, User, Review, ReviewImage, Booking } = require('../../db/models');
+const { validateSpot, validateSpotExists, validateReview, validateBooking, validateDates, checkConflicts, validateSpotOwnership} = require('../../utils/validation')
 const { Op } = require('sequelize');
 
 const userAuthentication = async (req, res, next) => {
@@ -294,6 +294,59 @@ router.post('/:spotId/reviews', userAuthentication, validateSpotExists, validate
     return res.status(201).json(newReview)
 })
 
+// Get all Bookings for a Spot based on the Spot's id
+// working 
 
+router.get('/:spotId/bookings', userAuthentication, async (req, res) => {
+    const { user } = req;
+    const { spotId } = req.params;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if(spot) {
+        // initialize query option
+        let queryOptions = {
+            where: {spotId: spotId}
+        }; 
+        // if current user is the owner of spot
+        if (spot.ownerId == user.id) {
+            queryOptions.include = {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            };
+        } else { 
+        // if user is not the owner
+            queryOptions.attributes = ['spotId', 'startDate', 'endDate']
+        }
+        const bookings = await Booking.findAll(queryOptions);
+        return res.json({
+            Bookings: bookings
+        });
+        } else {
+            return res.status(404).json({
+                message: "Spot couldn't be found"
+            })
+    }
+});
+
+
+// Create a Booking from a Spot based on the Spot's id
+// working ???
+// test later
+
+
+router.post('/:spotId/bookings', userAuthentication, validateSpotExists, validateSpotOwnership, validateBooking, validateDates, checkConflicts, async (req, res) => {
+    const { startDate, endDate } = req.body;
+    const { spotId } = req.params;
+    const userId = req.user.id;
+
+    const newBooking = await Booking.create({
+        userId,
+        spotId,
+        startDate,
+        endDate
+    });
+    return res.json(newBooking);
+})
 
 module.exports = router; 
