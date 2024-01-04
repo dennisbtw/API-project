@@ -1,6 +1,7 @@
 // backend/utils/validation.js
 const { validationResult, check} = require('express-validator');
-const { Spot } = require('../db/models');
+const { Spot, Booking, } = require('../db/models');
+const { Op } = require('sequelize');
 
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
@@ -82,9 +83,10 @@ const validateReview = [
   handleValidationErrors
 ];
 
+
 module.exports = {
   handleValidationErrors,
   validateSpot,
   validateSpotExists,
-  validateReview
+  validateReview,
 };
