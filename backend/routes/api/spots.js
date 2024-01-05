@@ -27,7 +27,7 @@ const userAuthorization = async (req, res, next) => {
     next();
 };
 // get all spots 
-// not working not throwing error
+
 
 router.get('/', async (req, res, next) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
@@ -66,50 +66,50 @@ router.get('/', async (req, res, next) => {
         if(minPrice && maxPrice) obj.price = {[Op.between]: [minPrice, maxPrice]}
         
     
-        
-    
         const spots = await Spot.findAll({
-            obj,
+            where: obj,
             limit: size,
             offset: size * (page - 1)
         });
     
         const allSpots = [];
     
-        for(let i = 0; i < spots.length; i++) {
+        for (let i = 0; i < spots.length; i++) {
             let spot = spots[i];
     
-            const numReviews = await Review.count({
-                where: {spotId: spot.id}
-            })
-    
-            const sumReview = await Review.sum('stars', {
-                where: {spotId: spot.id}
+            const reviews = await Review.findAll({
+                where: { spotId: spot.id },
+                attributes: ['stars']
             });
     
+            let totalStars = 0;
+            reviews.forEach(review => totalStars += review.stars);
     
-            const avgRating = sumReview / numReviews;
+            let avgRating;
+            if (reviews.length > 0) {
+                avgRating = totalStars / reviews.length;
+            } else {
+                avgRating = "This spot has no reviews yet";
+            }
     
             const previewImage = await SpotImage.findOne({
-                where: {spotId: spot.id, preview: true}
-            })
+                where: { spotId: spot.id, preview: true },
+                attributes: ['url']
+            });
+    
             spot = spot.toJSON();
-            if (avgRating) {
-                spot.avgRating = avgRating;
+            spot.avgRating = avgRating;
+            if (previewImage) {
+                spot.previewImage = previewImage.url;
             } else {
-                spot.avgRating = "This spot has no reviews yet"
+                spot.previewImage = "This spot has no preview image yet";
             }
-            if(previewImage) {
-                spot.previewImage = previewImage.url
-            }else {
-                spot.previewImage = "This spot has no preview image yet"
-            }
+    
             allSpots.push(spot);
         }
     
-        return res.json({Spots: allSpots, page, size})
-    }
-    )
+        return res.json({ Spots: allSpots, page, size });
+    });
 
 // get all spots owned by the current user
 
