@@ -100,7 +100,10 @@ router.post('/:reviewId/images', userAuthentication, userAuthorization, async (r
     const newImage = await ReviewImage.create({
         reviewId, url
     });
-    res.json(newImage);
+    res.json({
+        id: newImage.id,
+        url: newImage.url
+    });
 })
 
 // Edit a Review
