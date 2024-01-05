@@ -208,7 +208,7 @@ router.get('/:spotId', async(req, res, next) => {
 
 // create a spot
 // working
-router.post('/', requireAuth, validateSpot, async(req, res) => {
+router.post('/', userAuthentication, validateSpot, async(req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const { user } = req;
 
