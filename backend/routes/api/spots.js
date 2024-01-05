@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, User, Review, ReviewImage, Booking } = require('../../db/models');
-const { validateSpot, validateSpotExists, validateReview} = require('../../utils/validation')
+const { validateSpot, validateSpotExists, validateReview, validateQuery} = require('../../utils/validation')
 const { Op } = require('sequelize');
 
 const userAuthentication = async (req, res, next) => {
@@ -26,49 +26,90 @@ const userAuthorization = async (req, res, next) => {
     }
     next();
 };
-// get all spots
-// working
+// get all spots 
+// not working not throwing error
 
 router.get('/', async (req, res, next) => {
-    const spots = await Spot.findAll({
-        include: [
-            {
-                model: Review,
-                attributes: ['stars']
-            },
-            {
-                model: SpotImage,
-                attributes: ['url'],
-                limit: 1
-            }
-        ]
-    });
-    const spotsWithRatings = spots.map(spot => {
-        const spotData = spot.toJSON();
-        let totalStars = 0;
-        spotData.Reviews.forEach(review => {
-            totalStars += review.stars;
-        });
-        let avgRating = 0;
-        if(spotData.Reviews.length > 0) {
-            avgRating = totalStars / spotData.Reviews.length;
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    
+        const errors = validateQuery(req.query)
+    
+        if(Object.keys(errors).length) {
+            res.status(400);
+            const err = new Error();
+            err.message = "Bad Request"
+            err.errors = errors
+    
+            return res.json(err)
         }
-        let previewImage = null;
-        if(spotData.SpotImages.length > 0) {
-            previewImage = spotData.SpotImages[0].url;
-        }
+        page = parseInt(page);
+        size = parseInt(size);
+    
+        if (Number.isNaN(page) || page <= 0 || !page) page = 1;
+        if (Number.isNaN(size) || size <= 0 || !size) size = 20;
         
-        delete spotData.Reviews;
-        delete spotData.SpotImages;
-
-        return {
-            ...spotData,
-            avgRating,
-            previewImage
+        if(page > 10) page = 10;
+        if(size > 20) size = 20;
+    
+        const obj = {};
+    
+        if(minLat && !maxLat) obj.lat = {[Op.gte]: minLat}
+        if(maxLat && !minLat) obj.lat = {[Op.lte]: maxLat}
+        if(minLat && maxLat) obj.lat = {[Op.between]: [minLat, maxLat]}
+    
+        if(minLng && !maxLng) obj.lng = {[Op.gte]: minLng}
+        if(maxLng && !minLng) obj.lng = {[Op.lte]: maxLng}
+        if(minLng && maxLng) obj.lng = {[Op.between]: [minLng, maxLng]}
+    
+        if(minPrice && !maxPrice) obj.minPrice = minPrice
+        if(maxPrice && !minPrice) obj.maxPrice = maxPrice
+        if(minPrice && maxPrice) obj.price = {[Op.between]: [minPrice, maxPrice]}
+        
+    
+        
+    
+        const spots = await Spot.findAll({
+            obj,
+            limit: size,
+            offset: size * (page - 1)
+        });
+    
+        const allSpots = [];
+    
+        for(let i = 0; i < spots.length; i++) {
+            let spot = spots[i];
+    
+            const numReviews = await Review.count({
+                where: {spotId: spot.id}
+            })
+    
+            const sumReview = await Review.sum('stars', {
+                where: {spotId: spot.id}
+            });
+    
+    
+            const avgRating = sumReview / numReviews;
+    
+            const previewImage = await SpotImage.findOne({
+                where: {spotId: spot.id, preview: true}
+            })
+            spot = spot.toJSON();
+            if (avgRating) {
+                spot.avgRating = avgRating;
+            } else {
+                spot.avgRating = "This spot has no reviews yet"
+            }
+            if(previewImage) {
+                spot.previewImage = previewImage.url
+            }else {
+                spot.previewImage = "This spot has no preview image yet"
+            }
+            allSpots.push(spot);
         }
-    });
-    res.json({ Spots: spotsWithRatings });
-});
+    
+        return res.json({Spots: allSpots, page, size})
+    }
+    )
 
 // get all spots owned by the current user
 
