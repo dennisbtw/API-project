@@ -70,6 +70,66 @@ module.exports = {
       name: 'Forest Hideaway',
       description: "It's a perfect retreat for those seeking a peaceful escape amidst the wonders of the natural world.",
       price: 70
+    },
+    {
+      ownerId: 6,
+      address: '101 Cherry Blossom Lane',
+      city: 'Sakura City',
+      state: 'Floria',
+      country: 'Animalia',
+      lat: 34.6937,
+      lng: 135.5023,
+      name: 'Cherry Blossom Cottage',
+      description: 'Nestled among blooming cherry trees, this cottage offers a serene escape.',
+      price: 80
+    },
+    {
+      ownerId: 7,
+      address: '202 Ocean Drive',
+      city: 'Marine Bay',
+      state: 'Aquaria',
+      country: 'Animalia',
+      lat: 25.7617,
+      lng: -80.1918,
+      name: 'Seaside Getaway',
+      description: 'A beachfront property offering stunning ocean views and relaxing vibes.',
+      price: 100
+    },
+    {
+      ownerId: 8,
+      address: '303 Mountain Road',
+      city: 'Highpeak Town',
+      state: 'Altitude',
+      country: 'Animalia',
+      lat: 39.7392,
+      lng: -104.9903,
+      name: 'Mountain View Cabin',
+      description: 'A cozy cabin at the foothills of the mountains, perfect for nature lovers.',
+      price: 90
+    },
+    {
+      ownerId: 9,
+      address: '404 Forest Path',
+      city: 'Greenwood',
+      state: 'Sylvan',
+      country: 'Animalia',
+      lat: 47.6062,
+      lng: -122.3321,
+      name: 'Woodland Retreat',
+      description: 'A secluded retreat in the heart of the forest, ideal for a peaceful getaway.',
+      price: 75
+    },
+    {
+      ownerId: 10,
+      address: '505 Desert Trail',
+      city: 'Sandy Ridge',
+      state: 'Dune',
+      country: 'Animalia',
+      lat: 36.1699,
+      lng: -115.1398,
+      name: 'Desert Oasis',
+      description: 'A unique desert experience, offering stunning landscapes and starry nights.',
+      price: 85
     }
    ], {validate: true});
   },

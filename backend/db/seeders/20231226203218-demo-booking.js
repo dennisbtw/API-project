@@ -40,6 +40,36 @@ module.exports = {
         userId: 5,
         startDate: '2027-12-26',
         endDate: '2028-3-10' 
+      },
+      {
+        spotId: 6,
+        userId: 6,
+        startDate: '2028-12-26',
+        endDate: '2029-3-10'
+      },
+      {
+        spotId: 7,
+        userId: 7,
+        startDate: '2029-12-26',
+        endDate: '2030-3-10'
+      },
+      {
+        spotId: 8,
+        userId: 8,
+        startDate: '2030-12-26',
+        endDate: '2031-3-10'
+      },
+      {
+        spotId: 9,
+        userId: 9,
+        startDate: '2031-12-26',
+        endDate: '2032-3-10'
+      },
+      {
+        spotId: 10,
+        userId: 10,
+        startDate: '2032-12-26',
+        endDate: '2033-3-10'
       }
     ], { validate: true})
   },

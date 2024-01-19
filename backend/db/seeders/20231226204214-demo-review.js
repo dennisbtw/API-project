@@ -38,6 +38,36 @@ module.exports = {
         userId: 5,
         review: "Almost perfect",
         stars: 4
+      }, 
+      {
+        spotId: 7,
+        userId: 6,
+        review: "Almost perfect",
+        stars: 4
+      },
+      {
+        spotId: 8,
+        userId: 7,
+        review: "Almost perfect",
+        stars: 4
+      },
+      {
+        spotId: 9,
+        userId: 8,
+        review: "Almost perfect",
+        stars: 4
+      },
+      {
+        spotId: 10,
+        userId: 9,
+        review: "Almost perfect",
+        stars: 4
+      },
+      {
+        spotId: 6,
+        userId: 10,
+        review: "Almost perfect",
+        stars: 4
       }
     ], {validate: true})
   },
