@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllSpotsThunk } from "../../store/spots";
 import { useNavigate } from "react-router-dom";
+import './Spots.css'
 
 const SpotsList = () => {
     const dispatch = useDispatch();

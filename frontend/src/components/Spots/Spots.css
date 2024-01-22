@@ -1,0 +1,37 @@
+
+  #tilesContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 40px;
+    column-gap: 5px;
+    border-top: 2px solid lightgray;
+    padding-top: 20px;
+    width: 100%;
+  }
+
+  #innerTileContainerHome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .spotTile {
+    width: 380px;
+    justify-self: center;
+  }
+  
+  .spotTile:hover {
+    cursor: pointer;
+  }
+  
+  .tileImage {
+    height: 350px;
+    width: 380px;
+    border-radius: 5px;
+  }
+  
+  .location-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
