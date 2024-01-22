@@ -5,7 +5,7 @@ import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation/Navigation-bonus';
 import * as sessionActions from './store/session';
-
+import SpotsList from './components/Spots/Spots';
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -28,18 +28,19 @@ const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
+      // {
+      //   path: '/',
+      //   element: 
+      //   <h1>Welcome!</h1>
+      // },
       {
         path: '/',
-        element: <h1>Welcome!</h1>
+        element: <SpotsList />
       },
-      // {
-      //   path: 'login',
-      //   element: <LoginFormPage />
-      // },
-      // {
-      //   path: 'signup',
-      //   element: <SignupFormPage />
-      // }
+      {
+        path: '*',
+        element: <h2>Page Not Found</h2>
+      }
     ]
   }
 ]);
