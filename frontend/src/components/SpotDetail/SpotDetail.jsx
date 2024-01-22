@@ -1,45 +1,51 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import { getOneSpotThunk } from "../../store/spots";
+import './SpotDetail.css';
 
 const SpotDetail = () => {
-    const {spotId} = useParams();
+    const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots[spotId]);
+
     useEffect(() => {
         dispatch(getOneSpotThunk(spotId));
-    },[dispatch, spotId]);
+    }, [dispatch, spotId]);
 
-    if(!spot) return null;
-    
-    const handleReserveClick = () => {
-        alert("Feature coming soon");
-    };
-    
+    if (!spot || !spot.SpotImages) return <div>Loading...</div>;
+
+    const imagesArr = spot.SpotImages;
+
     return (
-        <div className="spot-detail">
-        <h1>{spot.name}</h1>
-        <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
-        <div className="images">
-            <img src={spot.images[0]} alt={spot.name} className="large-image" />
-            <div className="small-images">
-                {spot.images.slice(1, 5).map((image, index) => (
-                    <img key={index} src={image} alt={`${spot.name} ${index + 1}`} />
+        <div id="spot-detail-main-container">
+            <div id="spot-detail-heading-info-container">
+                <p className="spot-title">{spot.name}</p>
+                <span id="spot-detail-location-info">{spot.city}, {spot.state}, {spot.country}</span>
+            </div>
+            <div className="spot-detail-all-images-container">
+                <div className="spot-detail-image-container">
+                    <img className="spot-detail-main-img" src={imagesArr[0].url} alt="Main Spot"/>
+                </div>
+                <div className="small-images-container">
+                    {imagesArr.slice(1).map((image, index) => (
+                        <div key={index} className="indiv-small-img-boxes">
+                            <img className="spot-detail-small-image" src={image.url} alt={`Spot Image ${index + 1}`} />
+                        </div>
                     ))}
+                </div>
+            </div>
+            <div id="spot-info-container">
+                <div id="spot-info">
+                    <h2 id="hosted-by-name-header">Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+                    <p>{spot.description}</p>
+                </div>
+                <div id="reservation-section">
+                    <button id="reserve-button" onClick={() => alert("Feature coming soon")}>Reserve</button>
+                </div>
             </div>
         </div>
-        <p>Hosted by {spot.hostFirstName} {spot.hostLastName}</p>
-        <p>{spot.description}</p>
-        <div className="callout-info-box">
-            <p>{spot.price} per night</p>
-            <button onClick={handleReserveClick}>Reserve</button>
-        </div>
-    </div>
     );
-}
-
-
-
+};
 
 export default SpotDetail;
