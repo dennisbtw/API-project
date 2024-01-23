@@ -13,7 +13,7 @@ const SpotDetail = () => {
         dispatch(getOneSpotThunk(spotId));
     }, [dispatch, spotId]);
 
-    if (!spot || !spot.SpotImages) return <div>Loading...</div>;
+    if (!spot || !spot.SpotImages) return null;
 
     const imagesArr = spot.SpotImages;
 
