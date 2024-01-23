@@ -33,11 +33,33 @@ const CreateSpot = () => {
       setErrors(errors)
       return errors
     }
+
     if(!name) {
         error.name= "Name is required"
         setErrors(errors)
         return errors
-      }
+    }
+
+  //     setErrors(error);
+
+  // // Check if there are any errors and return if there are
+  // if (Object.keys(error).length > 0) {
+  //   return error;
+  // }
+    
+  //   const imageUrls = [image1, image2, image3, image4];
+  //   for (let i = 0; i < imageUrls.length; i++) {
+  //     const imageUrl = imageUrls[i];
+  //     if (imageUrl) {
+  //       const extension = imageUrl.split('.').pop().toLowerCase();
+  //       if (extension !== 'png' && extension !== 'jpg' && extension !== 'jpeg') {
+  //         error[`image${i + 1}`] = "Image URL needs to end in png or jpg (or jpeg)";
+  //         setErrors(error);
+  //         return error;
+  //       }
+  //     }
+  //   }
+  //   setErrors(error);
 
     const spot = {
       address,
@@ -227,6 +249,7 @@ const CreateSpot = () => {
             value={image1}
             onChange={(e) => setImage1(e.target.value)}
           />
+          {/* {errors.image1 && <span style={{ color: "red" }}>{errors.image1}</span>} */}
           <input
             className="image-url-input"
             placeholder="Image URL"
@@ -234,6 +257,7 @@ const CreateSpot = () => {
             value={image2}
             onChange={(e) => setImage2(e.target.value)}
           />
+          {/* {errors.image2 && <span style={{ color: "red" }}>{errors.image2}</span>} */}
           <input
             className="image-url-input"
             placeholder="Image URL"
@@ -241,6 +265,7 @@ const CreateSpot = () => {
             value={image3}
             onChange={(e) => setImage3(e.target.value)}
           />
+          {/* {errors.image3 && <span style={{ color: "red" }}>{errors.image3}</span>} */}
           <input
             className="image-url-input"
             placeholder="Image URL"
@@ -248,6 +273,7 @@ const CreateSpot = () => {
             value={image4}
             onChange={(e) => setImage4(e.target.value)}
           />
+          {/* {errors.image4 && <span style={{ color: "red" }}>{errors.image4}</span>} */}
         </label>
         <button id="submit-create-spot" type="submit">Create Spot</button>
       </form>

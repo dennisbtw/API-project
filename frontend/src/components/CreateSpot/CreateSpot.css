@@ -4,7 +4,6 @@
     padding: 20px;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 #country-label-spot, #address-label-spot, #city-label-spot, #state-label-spot, .create-border-bottom {
@@ -12,7 +11,7 @@
     margin-bottom: 10px;
 }
 
-.country-input, .address-input, .city-input, .state-input, .spot-name-input, .price-input, .image-url-input, .create-text-area, .preview-image-url {
+.country-input, .address-input, .city-input, .state-input, .spot-name-input, .price-input, .image-url-input, .preview-image-url {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -21,7 +20,16 @@
     border-radius: 4px;
     box-sizing: border-box;
 }
-
+.create-text-area{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 150px; 
+}
 #city-state-div {
     display: flex;
     justify-content: space-between;
@@ -44,10 +52,6 @@
     box-sizing: border-box;
 }
 
-.city-input:focus {
-    border-color: #FF385C;
-    outline: none;
-}
 #state-label-spot {
     flex: 1;
 }
@@ -59,12 +63,15 @@
     box-sizing: border-box;
 }
 #submit-create-spot {
-    width: 100%;
-    background: #FF385C;
+    background: #d84228;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 }

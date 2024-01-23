@@ -4,6 +4,8 @@ import { csrfFetch } from "./csrf";
 const GET_ALL_SPOTS = 'spots/getSpots'
 const GET_ONE_SPOTS = 'spots/getSpot'
 const CREATE_SPOT = 'spots/createSpot'
+const DELETE_SPOT = 'spots/deleteSpot'
+// const UPDATE_SPOT = 'spots/updateSpot'
 
 // action creators
 const getAllSpots = (spots) => {
@@ -26,6 +28,20 @@ const createSpot = (spot) => {
         spot
     }
 }
+
+const deleteSpot = (spotId) => {
+  return {
+    type: DELETE_SPOT,
+    spotId
+  }
+}
+
+// const updatedSpot = (spot) => {
+//   return {
+//     type: UPDATE_SPOT,
+//     spot
+//   }
+// }
 
 // thunk action creators
 
@@ -50,7 +66,6 @@ export const getOneSpotThunk = (spotId) => async (dispatch) => {
     } 
 }
 
-
 export const createSpotThunk = (spot, images) => async (dispatch) => {
   try {
     const response = await csrfFetch ('/api/spots', {
@@ -74,7 +89,7 @@ export const createSpotThunk = (spot, images) => async (dispatch) => {
   }
 }
   
-  export const AddImageThunk = (spotId, images) => async () => {
+export const AddImageThunk = (spotId, images) => async () => {
   try {
     const newImgArr = [];
     for(let image of images) {
@@ -106,7 +121,28 @@ export const createSpotThunk = (spot, images) => async (dispatch) => {
     dispatch(createSpot(newSpot))
 }
   
+export const destroySpot = (spot) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spot.id}`, {
+    method: 'DELETE'
+  })
+  if (response.ok) {
+    dispatch(deleteSpot(spot.id))
+  }
+}
 
+export const currentSpotThunk = () => async (dispatch) => {
+  const response = await fetch('/api/spots/current', {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  if(response.ok) {
+    const spots = await response.json();
+    dispatch(getAllSpots(spots))
+    return spots;
+  }
+}
 
 // reducer 
 
@@ -127,6 +163,11 @@ const spotsReducer = (state= {}, action) => {
         case CREATE_SPOT: {
             const newState = {...state, [action.spot.id]: action.spot};
             return newState;
+        }
+        case DELETE_SPOT:{
+          const newState = {...state};
+          delete newState[action.spotId]
+          return newState
         }
         default:
             return state;
