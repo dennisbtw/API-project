@@ -1,88 +1,70 @@
-.create-spot-form {
-    font-family: Arial, sans-serif;
+#create-spot-container {
     max-width: 600px;
-    margin: auto;
+    margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+    background: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.section-divider-line {
-    border-bottom: 1px solid #ebebeb;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-}
-
-
-.h1-header, .create-spot-h2{
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.label {
+#country-label-spot, #address-label-spot, #city-label-spot, #state-label-spot, .create-border-bottom {
     display: block;
     margin-bottom: 10px;
-    color: #333;
 }
 
-.text-input-label {
+.country-input, .address-input, .city-input, .state-input, .spot-name-input, .price-input, .image-url-input, .create-text-area, .preview-image-url {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
-input::placeholder, textarea::placeholder {
-    color: #aaa;
-}
-
-
-.errors {
-    color: #d84228;
-    font-size: 15px;
-}
-
-
-.city-state-input {
+#city-state-div {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-.description-input .text-input-label { 
-    height: 100px; 
-    border: 2px solid black;
+#state-label-spot{
+    margin-left: 10px;
+}
+#city-label-spot {
+    flex: 1;
+    margin-right: 10px; 
 }
 
-.price-input-detail {
-    display: flex;
-    align-items: center;
+.city-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.dollar-sign {
-    margin-right: 5px;
-    font-size: 18px;
+.city-input:focus {
+    border-color: #FF385C;
+    outline: none;
 }
-
-.create-button {
-    background-color: #d84228;
+#state-label-spot {
+    flex: 1;
+}
+.state-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+#submit-create-spot {
+    width: 100%;
+    background: #FF385C;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-.create-spot-form-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.create-button:hover {
-    background-color: #d84228;
-}
-
-.create-button:disabled {
-    background-color: #ccc;
-    cursor: default;
+    font-size: 1em;
 }

@@ -50,53 +50,62 @@ export const getOneSpotThunk = (spotId) => async (dispatch) => {
     } 
 }
 
-export const createSpotThunk = (spot, images) => async (dispatch) => {
-    const res = await csrfFetch('/api/spots', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(spot)
-    });
 
-    if (res.ok) {
-        const data = await res.json();
-        const resPreviewImage = await csrfFetch(`/api/spots/${data.id}/images`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                url: images.previewImage,
-                preview: true
-            })
+export const createSpotThunk = (spot, images) => async (dispatch) => {
+  try {
+    const response = await csrfFetch ('/api/spots', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(spot)
         });
 
-        if (resPreviewImage.ok) {
-            const previewImageData = await resPreviewImage.json();
-            data.previewImage = previewImageData.url;
-        }
-
-        const imageKeys = ['image1', 'image2', 'image3', 'image4'];
-        for (const key of imageKeys) {
-            const imageUrl = images[key];
-            if (imageUrl) {
-                const resImage = await csrfFetch(`/api/spots/${data.id}/images`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        url: imageUrl,
-                        preview: false
-                    })
-                });
-
-                if (resImage.ok) {
-                    const imageData = await resImage.json();
-                    data[key] = imageData.url;
-                }
-            }
-        }
-
-        dispatch(createSpot(data));
-        return data;
+    if(response.ok) {
+      const newSpot = await response.json();
+      const newImgArr = await dispatch(AddImageThunk(newSpot.id, images));
+      const updatedSpot = { ...newSpot, images: newImgArr };
+      dispatch(NewSpotStoreThunk(updatedSpot));
+      return updatedSpot;
     }
-};
+  } catch (error) {
+    const errors = await error.json();
+    return errors;
+  }
+}
+  
+  export const AddImageThunk = (spotId, images) => async () => {
+  try {
+    const newImgArr = [];
+    for(let image of images) {
+      const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          url: image,
+          preview: true
+        })
+      })
+      if(response.ok) {
+        const newImg = await response.json();
+        newImgArr.push(newImg)
+      }
+  
+    }
+    return newImgArr;
+  
+  } catch (error) {
+    const errors = await error.json();
+    return errors
+  }
+  }
+  
+  export const NewSpotStoreThunk = (newSpot) => (dispatch) => {
+    dispatch(createSpot(newSpot))
+}
+  
 
 
 // reducer 
@@ -115,9 +124,10 @@ const spotsReducer = (state= {}, action) => {
             const newState = {...state, [action.spot.id]: action.spot};
             return newState;
         }
-        case CREATE_SPOT:
+        case CREATE_SPOT: {
             const newState = {...state, [action.spot.id]: action.spot};
             return newState;
+        }
         default:
             return state;
     }
