@@ -26,16 +26,10 @@
     color: #333;
 }
 
-
-input[type='text'],
-input[type='url'],
-input[type='number'],
-textarea 
-{
+.text-input-label {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -47,7 +41,7 @@ input::placeholder, textarea::placeholder {
 
 .errors {
     color: #d84228;
-    font-size: 0.9em;
+    font-size: 15px;
 }
 
 
@@ -56,11 +50,10 @@ input::placeholder, textarea::placeholder {
     gap: 10px;
 }
 
-
-.description-text-box {
-    height: 100px;
+.description-input .text-input-label { 
+    height: 100px; 
+    border: 2px solid black;
 }
-
 
 .price-input-detail {
     display: flex;
@@ -69,7 +62,7 @@ input::placeholder, textarea::placeholder {
 
 .dollar-sign {
     margin-right: 5px;
-    font-size: 1.2em;
+    font-size: 18px;
 }
 
 .create-button {

@@ -97,6 +97,8 @@ export const createSpotThunk = (spot, images) => async (dispatch) => {
         return data;
     }
 };
+
+
 // reducer 
 
 const spotsReducer = (state= {}, action) => {
