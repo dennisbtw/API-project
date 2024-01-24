@@ -153,7 +153,6 @@ const spotsReducer = (state= {}, action) => {
             action.spots.Spots.forEach(spot => {
                 newState[spot.id] = spot;
             });
-
             return newState
         }
         case GET_ONE_SPOTS: { 
@@ -169,6 +168,10 @@ const spotsReducer = (state= {}, action) => {
           delete newState[action.spotId]
           return newState
         }
+        // case UPDATE_SPOT: {
+        //   const newState = { ...state, [action.spot.id]: action.spot };
+        //   return newState;
+        // }
         default:
             return state;
     }
