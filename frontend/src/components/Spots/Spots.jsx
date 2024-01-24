@@ -27,7 +27,7 @@ const SpotsList = () => {
                             <div className="location-container">
                                 {spot.city}, {spot.state}
                                 <div>
-                                    🌟
+                                    ⭐️
                                     {typeof spot.avgRating === "number" ? spot.avgRating.toFixed(2) : 'New'}
                                 </div>
                             </div>

@@ -1,95 +1,77 @@
-.create-spot-form {
-    font-family: Arial, sans-serif;
+#create-spot-container {
     max-width: 600px;
-    margin: auto;
+    margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+    background: white;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.section-divider-line {
-    border-bottom: 1px solid #ebebeb;
-    padding-bottom: 20px;
+#country-label-spot, #address-label-spot, #city-label-spot, #state-label-spot, .create-border-bottom {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.country-input, .address-input, .city-input, .state-input, .spot-name-input, .price-input, .image-url-input, .preview-image-url {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.create-text-area{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 150px; 
+}
+#city-state-div {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
-
-.h1-header, .create-spot-h2{
-    color: #333;
-    margin-bottom: 10px;
+#state-label-spot{
+    margin-left: 10px;
+}
+#city-label-spot {
+    flex: 1;
+    margin-right: 10px; 
 }
 
-.label {
-    display: block;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-
-input[type='text'],
-input[type='url'],
-input[type='number'],
-textarea 
-{
+.city-input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
-input::placeholder, textarea::placeholder {
-    color: #aaa;
+#state-label-spot {
+    flex: 1;
 }
-
-
-.errors {
-    color: #d84228;
-    font-size: 0.9em;
+.state-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
-
-
-.city-state-input {
-    display: flex;
-    gap: 10px;
-}
-
-
-.description-text-box {
-    height: 100px;
-}
-
-
-.price-input-detail {
-    display: flex;
-    align-items: center;
-}
-
-.dollar-sign {
-    margin-right: 5px;
-    font-size: 1.2em;
-}
-
-.create-button {
-    background-color: #d84228;
+#submit-create-spot {
+    background: #d84228;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-.create-spot-form-button {
+    font-size: 1em;
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-.create-button:hover {
-    background-color: #d84228;
-}
-
-.create-button:disabled {
-    background-color: #ccc;
-    cursor: default;
+    justify-content: center;
+    margin: 0 auto;
 }

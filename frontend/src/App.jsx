@@ -8,6 +8,7 @@ import * as sessionActions from './store/session';
 import SpotsList from './components/Spots/Spots';
 import SpotDetail from './components/SpotDetail/SpotDetail';
 import CreateSpot from './components/CreateSpot/CreateSpot';
+import ManageSpots from './components/ManageSpots/ManageSpots';
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         path: '/spots/new',
         element: <CreateSpot />
       },
+      {
+        path: '/spots/current',
+        element: <ManageSpots />
+      }, 
       {
         path: '*',
         element: <h2>Page Not Found</h2>
