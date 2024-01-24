@@ -18,7 +18,6 @@ const ManageSpots = () => {
         dispatch(currentSpotThunk());
     }, [dispatch]);
 
-
     return (
         <div className="manage-spots-container">
             <h1>Manage Spots</h1>
@@ -28,7 +27,10 @@ const ManageSpots = () => {
                         <img src={spot.previewImage} alt={spot.name} className="spot-thumbnail" />
                         <div className="spot-info">
                             <span>{spot.city}, {spot.state}</span>
-                            <span>⭐{spot.avgRating.toFixed(1)}</span>
+                            <span>
+                                {typeof spot.avgRating === "number" && spot.avgRating > 0 ? 
+                                 `⭐${spot.avgRating.toFixed(2)}` : '⭐New'}
+                            </span>
                             <span>${spot.price} night</span>
                         </div>
                         <div className="spot-actions">

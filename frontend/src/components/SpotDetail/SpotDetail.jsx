@@ -41,6 +41,10 @@ const SpotDetail = () => {
                     <p>{spot.description}</p>
                 </div>
                 <div id="reservation-section">
+                <div className="price-rating-numReview">
+                    <h2>${spot.price}</h2>
+                    <span>night</span>
+                </div>
                     <button id="reserve-button" onClick={() => alert("Feature coming soon")}>Reserve</button>
                 </div>
             </div>

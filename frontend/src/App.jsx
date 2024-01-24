@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-// import LoginFormPage from './components/LoginFormPage';
-// import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation/Navigation-bonus';
 import * as sessionActions from './store/session';
 import SpotsList from './components/Spots/Spots';
 import SpotDetail from './components/SpotDetail/SpotDetail';
 import CreateSpot from './components/CreateSpot/CreateSpot';
 import ManageSpots from './components/ManageSpots/ManageSpots';
+import UpdateSpot from './components/UpdateSpot/UpdateSpot';
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -34,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <SpotsList />
+      },
+      {
+        path: '/spots/:spotId/edit',
+        element: <UpdateSpot />
       },
       {
         path: '/spots/:spotId',
