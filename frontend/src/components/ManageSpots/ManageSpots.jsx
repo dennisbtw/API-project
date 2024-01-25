@@ -37,7 +37,7 @@ const ManageSpots = () => {
                                 <div>{spot.city}, {spot.state}</div>
                                 <div>
                                     <span role="img" aria-label="star">⭐</span>
-                                    {typeof spot.avgRating === "number" ? spot.avgRating.toFixed(2) : 'New'}
+                                    {spot.avgRating > 0 ? spot.avgRating.toFixed(2) : 'New'}
                                 </div>
                                 <span>${spot.price} per night</span>
                             </div>
