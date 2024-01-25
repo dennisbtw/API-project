@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getOneSpotThunk } from "../../store/spots";
 import './SpotDetail.css';
-
+import SpotReviews from "../Reviews/Reviews";
+// import CreateReview from "../CreateReview/CreateReview";
 const SpotDetail = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
@@ -48,6 +49,8 @@ const SpotDetail = () => {
                     <button id="reserve-button" onClick={() => alert("Feature coming soon")}>Reserve</button>
                 </div>
             </div>
+            <SpotReviews spotId={spotId} />
+            {/* <CreateReview spotId={spotId} /> */}
         </div>
     );
 };
