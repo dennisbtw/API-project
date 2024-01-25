@@ -20,10 +20,10 @@ const deleteReviews = (reviewId) => {
     }
 }
 
-const createReview = (review) => {
+const createReview = (newReview) => {
     return {
         type: CREATE_REVIEW,
-        review
+        newReview
     }
 }
 
@@ -63,7 +63,7 @@ export const createReviewThunk = (review, spotId, currentUser) => async (dispatc
       })
       if(response.ok) {
         const newReview = await response.json();
-        dispatch(createReview({...newReview, ...currentUser}))
+        dispatch(createReview(newReview)); 
 
         return newReview;
     }
@@ -86,7 +86,9 @@ const reviewsReducer = (state = {}, action) => {
         }
         case CREATE_REVIEW: {
             const newState = {...state};
-            newState[action.newReview.id] = action.newReview
+            if (action.newReview && action.newReview.id) {
+                newState[action.newReview.id] = action.newReview;
+            }
             return newState;
         }
         default:

@@ -1,22 +1,36 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getOneSpotThunk } from "../../store/spots";
 import './SpotDetail.css';
 import SpotReviews from "../Reviews/Reviews";
-// import CreateReview from "../CreateReview/CreateReview";
+import CreateReview from "../CreateReview/CreateReview";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+
 const SpotDetail = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots[spotId]);
-
+    const sessionUser = useSelector(state => state.session.user)
+    const reviews = useSelector(state => state.reviews)
+    const [rendered, setRendered] = useState(false);
+    
     useEffect(() => {
         dispatch(getOneSpotThunk(spotId));
-    }, [dispatch, spotId]);
+    }, [dispatch, spotId, reviews, rendered]);
+    
+    useEffect(() => {
+        if (reviews && sessionUser) {
+            const userReview = Object.values(reviews).find(review => review.userId === sessionUser.id && review.spotId === parseInt(spotId));
+            setRendered(!!userReview);
+        }
+    }, [reviews, sessionUser, spotId]);
 
     if (!spot || !spot.SpotImages) return null;
 
     const imagesArr = spot.SpotImages;
+
+
 
     return (
         <div id="spot-detail-main-container">
@@ -46,12 +60,37 @@ const SpotDetail = () => {
                     <h2>${spot.price}</h2>
                     <span>night</span>
                 </div>
+                <div>
+                    {spot.numReviews ? (
+                        <span className="spotReviewsReserveSection">
+                            ⭐️
+                            {typeof spot.avgRating === "number" ? spot.avgRating.toFixed(2) : 'New'}
+                            <span> · </span>
+                            {spot.numReviews} {spot.numReviews === 1 ? 'Review' : 'Reviews'}
+                        </span>
+                ) : (
+                        <span className="spotReviewsReserveSection">⭐ New</span>
+                    )}
+                </div>
                     <button id="reserve-button" onClick={() => alert("Feature coming soon")}>Reserve</button>
                 </div>
             </div>
-            <SpotReviews spotId={spotId} />
-            {/* <CreateReview spotId={spotId} /> */}
+            <section id="spotDetailReviewSection">
+        <div>
+          <h2><i className="fa-solid fa-star"></i>{spot.avgRating ? spot.avgRating.toFixed(2) : 'New'} · {spot.numReviews} {spot.numReviews === 1 ? 'Review' : 'Reviews'}</h2>
         </div>
+        {(sessionUser && !rendered && spot.Owner.id !== sessionUser.id) && (
+            <OpenModalButton
+                buttonText="Post Your Review"
+                buttonId="postYourReviewButton"
+                modalComponent={<CreateReview spotId={spotId} setRendered={setRendered} />}
+            />
+        )}
+        <div>
+          <SpotReviews spot={spot} rendered={rendered} />
+        </div>
+      </section>
+      </div>
     );
 };
 

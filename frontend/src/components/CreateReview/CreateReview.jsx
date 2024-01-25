@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createReviewThunk } from "../../store/review"; // Ensure this import path is correct
-import { useParams } from "react-router-dom";
+import { createReviewThunk } from "../../store/review"; 
+
 import './CreateReview.css';
 
-const CreateReview = () => {
-    const { spotId } = useParams();
+const CreateReview = ({ spotId }) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
     const [reviewText, setReviewText] = useState('');
