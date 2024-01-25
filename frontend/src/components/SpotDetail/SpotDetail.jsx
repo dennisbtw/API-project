@@ -6,6 +6,8 @@ import './SpotDetail.css';
 import SpotReviews from "../Reviews/Reviews";
 import CreateReview from "../CreateReview/CreateReview";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import { getReviewsThunk } from "../../store/review";
+import { clearReviews } from "../../store/review";
 
 const SpotDetail = () => {
     const { spotId } = useParams();
@@ -14,14 +16,39 @@ const SpotDetail = () => {
     const sessionUser = useSelector(state => state.session.user)
     const reviews = useSelector(state => state.reviews)
     const [rendered, setRendered] = useState(false);
+    const [avgRating, setAvgRating] = useState(null);
+    const [numReviews, setNumReviews] = useState(0);
+
+    useEffect(() => {
+        dispatch(getOneSpotThunk(spotId));
+    }, [dispatch, spotId]);
+    //reviews
+    // rendered
+
+    useEffect(() => {
+        const spotReviews = Object.values(reviews).filter(review => review.spotId === parseInt(spotId));
+        if (spotReviews.length > 0) {
+            const totalRating = spotReviews.reduce((acc, review) => acc + review.stars, 0);
+            setAvgRating(totalRating / spotReviews.length);
+            setNumReviews(spotReviews.length);
+        }
+    }, [reviews, spotId]);
     
     useEffect(() => {
         dispatch(getOneSpotThunk(spotId));
-    }, [dispatch, spotId, reviews, rendered]);
+        dispatch(getReviewsThunk(spotId));
     
+        return () => {
+            dispatch(clearReviews());
+        };
+    }, [dispatch, spotId]);
+    
+
+
     useEffect(() => {
         if (reviews && sessionUser) {
             const userReview = Object.values(reviews).find(review => review.userId === sessionUser.id && review.spotId === parseInt(spotId));
+            
             setRendered(!!userReview);
         }
     }, [reviews, sessionUser, spotId]);
@@ -61,14 +88,14 @@ const SpotDetail = () => {
                     <span>night</span>
                 </div>
                 <div>
-                    {spot.numReviews ? (
+                    {numReviews > 0 ? (
                         <span className="spotReviewsReserveSection">
                             ⭐️
-                            {typeof spot.avgRating === "number" ? spot.avgRating.toFixed(2) : 'New'}
+                            {avgRating.toFixed(2)}
                             <span> · </span>
-                            {spot.numReviews} {spot.numReviews === 1 ? 'Review' : 'Reviews'}
+                            {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
                         </span>
-                ) : (
+                    ) : (
                         <span className="spotReviewsReserveSection">⭐ New</span>
                     )}
                 </div>
@@ -76,9 +103,15 @@ const SpotDetail = () => {
                 </div>
             </div>
             <section id="spotDetailReviewSection">
-        <div>
-          <h2><i className="fa-solid fa-star"></i>{spot.avgRating ? spot.avgRating.toFixed(2) : 'New'} · {spot.numReviews} {spot.numReviews === 1 ? 'Review' : 'Reviews'}</h2>
-        </div>
+            <div>
+                {numReviews > 0 ? (
+                    <h2>
+                        ⭐️ {avgRating.toFixed(2)} · {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
+                    </h2>
+                ) : (
+                    <h2>⭐ New</h2>
+                )}
+    </div>
         {(sessionUser && !rendered && spot.Owner.id !== sessionUser.id) && (
             <OpenModalButton
                 buttonText="Post Your Review"

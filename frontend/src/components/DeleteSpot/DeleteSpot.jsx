@@ -12,10 +12,11 @@ const DeleteSpot = ({ spot }) => {
         return dispatch(destroySpot(spot))
         .then(closeModal)
     }
+    
     return (
         <div id='delete-container'>
             <h1>Confirm Delete</h1>
-            <div className="deleteButtonContainer">
+            <div className="delete-button-container">
                 <span>Are you sure you want to remove this spot from the listings?</span>
                 <button id='confirm-delete'className='delete-buttons' onClick={onClick}>Yes (Delete Spot)</button>
                 <button id='no-delete' className="delete-buttons" onClick={closeModal}>No (Keep Spot)</button>

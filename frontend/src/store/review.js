@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const GET_REVIEWS = 'reviews/getSpotReviews'
 const DELETE_REVIEWS = 'reviews/deleteReviews'
 const CREATE_REVIEW = 'reviews/createReviews'
+const CLEAR_REVIEWS = 'reviews/clearReviews';
 // action creators
 
 const getSpotReviews = (reviews) => {
@@ -26,6 +27,12 @@ const createReview = (newReview) => {
         newReview
     }
 }
+
+export const clearReviews = () => {
+    return {
+        type: CLEAR_REVIEWS
+    };
+};
 
 // thunks
 export const getReviewsThunk = (spotId) => async (dispatch) => {
@@ -60,14 +67,17 @@ export const createReviewThunk = (review, spotId, currentUser) => async (dispatc
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(review)
-      })
-      if(response.ok) {
+    });
+
+    if(response.ok) {
         const newReview = await response.json();
         dispatch(createReview(newReview)); 
 
+        dispatch(getReviewsThunk(spotId));
+
         return newReview;
     }
-}
+};
 // reducers
 
 const reviewsReducer = (state = {}, action) => {
@@ -90,6 +100,9 @@ const reviewsReducer = (state = {}, action) => {
                 newState[action.newReview.id] = action.newReview;
             }
             return newState;
+        }
+        case CLEAR_REVIEWS: {
+            return {}; 
         }
         default:
             return state;

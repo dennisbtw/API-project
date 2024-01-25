@@ -23,16 +23,23 @@ const ManageSpots = () => {
             navigate(`/spots/${spot.id}`);
         }
     }
-    
+
     return (
         <div className="manage-spots-container">
             <h1>Manage Spots</h1>
+            <button id="create-spot-button-manage-spot" onClick={() => navigate('/spots/new')}>Create a New Spot</button>
             <div className="spots-list">
                 {userSpots.map(spot => (
                     <div key={spot.id} className="spot-tile" onClick={navigateToSpot}>
                         <div className="navigate-spot">
                             <img src={spot.previewImage} alt={spot.name} className="spot-thumbnail navigate-spot" />
                             <div className="spot-info navigate-spot">
+                                <div>{spot.city}, {spot.state}</div>
+                                <div>
+                                    <span role="img" aria-label="star">⭐</span>
+                                    {typeof spot.avgRating === "number" ? spot.avgRating.toFixed(2) : 'New'}
+                                </div>
+                                <span>${spot.price} per night</span>
                             </div>
                         </div>
                         <div className="spot-actions">
