@@ -67,7 +67,7 @@ const SpotDetail = () => {
             </div>
             <div className="spot-detail-all-images-container">
                 <div className="spot-detail-image-container">
-                    <img className="spot-detail-main-img" src={imagesArr[0].url} alt="Main Spot"/>
+                    <img className="spot-detail-main-img" src={imagesArr[0].url} alt="Main Spot" />
                 </div>
                 <div className="small-images-container">
                     {imagesArr.slice(1).map((image, index) => (
@@ -83,47 +83,49 @@ const SpotDetail = () => {
                     <p>{spot.description}</p>
                 </div>
                 <div id="reservation-section">
-                <div className="price-rating-numReview">
-                    <h2>${spot.price}</h2>
-                    <span>night</span>
-                </div>
-                <div>
-                    {numReviews > 0 ? (
-                        <span className="spotReviewsReserveSection">
-                            ⭐️
-                            {avgRating.toFixed(2)}
-                            <span> · </span>
-                            {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
-                        </span>
-                    ) : (
-                        <span className="spotReviewsReserveSection">⭐ New</span>
-                    )}
-                </div>
+                    <div className="price-and-rating-container">
+                        <div className="price-container">
+                            <h2>${spot.price}</h2>
+                            <span className="night-span">night</span>
+                        </div>
+                        <div className="rating-container">
+                            {numReviews > 0 ? (
+                                <span className="spotReviewsReserveSection">
+                                    ⭐️
+                                    {avgRating.toFixed(2)}
+                                    <span> · </span>
+                                    {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
+                                </span>
+                            ) : (
+                                <span className="spotReviewsReserveSection">⭐ New</span>
+                            )}
+                        </div>
+                    </div>
                     <button id="reserve-button" onClick={() => alert("Feature coming soon")}>Reserve</button>
                 </div>
             </div>
             <section id="spotDetailReviewSection">
-            <div>
-                {numReviews > 0 ? (
-                    <h2>
-                        ⭐️ {avgRating.toFixed(2)} · {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
-                    </h2>
-                ) : (
-                    <h2>⭐ New</h2>
+                <div>
+                    {numReviews > 0 ? (
+                        <h2>
+                            ⭐️ {avgRating.toFixed(2)} · {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
+                        </h2>
+                    ) : (
+                        <h2>⭐ New</h2>
+                    )}
+                </div>
+                {(sessionUser && !rendered && spot.Owner.id !== sessionUser.id) && (
+                    <OpenModalButton
+                        buttonText="Post Your Review"
+                        buttonId="postYourReviewButton"
+                        modalComponent={<CreateReview spotId={spotId} setRendered={setRendered} />}
+                    />
                 )}
-    </div>
-        {(sessionUser && !rendered && spot.Owner.id !== sessionUser.id) && (
-            <OpenModalButton
-                buttonText="Post Your Review"
-                buttonId="postYourReviewButton"
-                modalComponent={<CreateReview spotId={spotId} setRendered={setRendered} />}
-            />
-        )}
-        <div>
-          <SpotReviews spot={spot} rendered={rendered} />
+                <div>
+                    <SpotReviews spot={spot} rendered={rendered} />
+                </div>
+            </section>
         </div>
-      </section>
-      </div>
     );
 };
 

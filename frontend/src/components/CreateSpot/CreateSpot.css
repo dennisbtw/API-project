@@ -75,3 +75,10 @@
     justify-content: center;
     margin: 0 auto;
 }
+.price-input-container {
+    display: flex; 
+    align-items: center; 
+}
+.money-sign {
+    margin-right: 5px;
+}

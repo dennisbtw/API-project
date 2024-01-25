@@ -17,7 +17,7 @@ const DeleteSpot = ({ spot }) => {
         <div id='delete-container'>
             <h1>Confirm Delete</h1>
             <div className="delete-button-container">
-                <span>Are you sure you want to remove this spot from the listings?</span>
+                <span className="confirm-text">Are you sure you want to remove this spot from the listings?</span>
                 <button id='confirm-delete'className='delete-buttons' onClick={onClick}>Yes (Delete Spot)</button>
                 <button id='no-delete' className="delete-buttons" onClick={closeModal}>No (Keep Spot)</button>
             </div>

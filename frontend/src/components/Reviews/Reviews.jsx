@@ -27,7 +27,12 @@ const SpotReviews = () => {
         return dateCreated.getFullYear();
     }
     
-    const reviewsForSpot = Object.values(reviews).filter(review => review.spotId === parseInt(spotId));
+    // const reviewsForSpot = Object.values(reviews).filter(review => review.spotId === parseInt(spotId));
+
+    const reviewsForSpot = Object.values(reviews)
+        .filter(review => review.spotId === parseInt(spotId))
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
 
     if (!reviewsForSpot.length) {
         return <p>No reviews available for this spot.</p>;
