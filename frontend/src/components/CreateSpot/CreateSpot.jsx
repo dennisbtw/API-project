@@ -51,13 +51,13 @@ const CreateSpot = () => {
     return error;
   }
     
-    const imageUrls = [image1, image2, image3, image4];
+    const imageUrls = [previewImage, image1, image2, image3, image4];
     for (let i = 0; i < imageUrls.length; i++) {
       const imageUrl = imageUrls[i];
       if (imageUrl) {
         const extension = imageUrl.split('.').pop().toLowerCase();
         if (extension !== 'png' && extension !== 'jpg' && extension !== 'jpeg') {
-          error[`image${i + 1}`] = "Image URL needs to end in png or jpg (or jpeg)";
+          error[`image${i + 1}`] = "Preview Image or Image URL needs to end in png or jpg (or jpeg)";
           setErrors(error);
           return error;
         }
@@ -256,7 +256,8 @@ const CreateSpot = () => {
             value={image1}
             onChange={(e) => setImage1(e.target.value)}
           />
-          {errors.image1 && <span style={{ color: "red" }}>{errors.image1}</span>}
+          {/* {errors.image1 && <span style={{ color: "red" }}>{errors.image1}</span>} */}
+          {(submitted && "image1" in errors) && <span style={{ color: "red" }}>{errors.image1}</span>}
           <input
             className="image-url-input"
             placeholder="Image URL"

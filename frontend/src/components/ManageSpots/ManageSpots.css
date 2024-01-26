@@ -1,0 +1,70 @@
+.manage-spots-container {
+    padding: 20px;
+}
+
+.spots-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Aligning with SpotsList */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.spot-tile {
+    width: 380px; 
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.spot-thumbnail {
+    height: 350px;
+    width: 380px; 
+    border-radius: 5px;
+}
+
+.spot-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    width: 100%; 
+}
+
+.location-rating-container {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    align-items: center;
+}
+
+.spot-actions {
+    display: flex;
+    padding: 10px;
+    width: 100%; 
+    gap: 10px;
+}
+
+
+@media (max-width: 1200px) {
+    .spots-list {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+@media (max-width: 900px) {
+    .spots-list {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 600px) {
+    .spots-list {
+        grid-template-columns: 1fr;
+    }
+    .spot-tile {
+        width: 90%;
+    }
+}
