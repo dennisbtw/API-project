@@ -30,40 +30,40 @@ const CreateSpot = () => {
 
     if(!previewImage) {
       error.previewImage = "Preview Image required"
-      setErrors(errors)
-      return errors
+      setErrors(error)
+      return error
     }
 
     if(!name) {
         error.name= "Name is required"
-        setErrors(errors)
-        return errors
+        setErrors(error)
+        return error
     }
     if(description.length < 30) {
       error.description = "Description 30 or more characters"
-      setErrors(errors)
-      return errors
+      setErrors(error)
+      return error
     }
   //     setErrors(error);
 
   // // Check if there are any errors and return if there are
-  // if (Object.keys(error).length > 0) {
-  //   return error;
-  // }
+  if (Object.keys(error).length > 0) {
+    return error;
+  }
     
-  //   const imageUrls = [image1, image2, image3, image4];
-  //   for (let i = 0; i < imageUrls.length; i++) {
-  //     const imageUrl = imageUrls[i];
-  //     if (imageUrl) {
-  //       const extension = imageUrl.split('.').pop().toLowerCase();
-  //       if (extension !== 'png' && extension !== 'jpg' && extension !== 'jpeg') {
-  //         error[`image${i + 1}`] = "Image URL needs to end in png or jpg (or jpeg)";
-  //         setErrors(error);
-  //         return error;
-  //       }
-  //     }
-  //   }
-  //   setErrors(error);
+    const imageUrls = [image1, image2, image3, image4];
+    for (let i = 0; i < imageUrls.length; i++) {
+      const imageUrl = imageUrls[i];
+      if (imageUrl) {
+        const extension = imageUrl.split('.').pop().toLowerCase();
+        if (extension !== 'png' && extension !== 'jpg' && extension !== 'jpeg') {
+          error[`image${i + 1}`] = "Image URL needs to end in png or jpg (or jpeg)";
+          setErrors(error);
+          return error;
+        }
+      }
+    }
+    setErrors(error);
 
     const spot = {
       address,
@@ -256,7 +256,7 @@ const CreateSpot = () => {
             value={image1}
             onChange={(e) => setImage1(e.target.value)}
           />
-          {/* {errors.image1 && <span style={{ color: "red" }}>{errors.image1}</span>} */}
+          {errors.image1 && <span style={{ color: "red" }}>{errors.image1}</span>}
           <input
             className="image-url-input"
             placeholder="Image URL"
@@ -265,6 +265,7 @@ const CreateSpot = () => {
             onChange={(e) => setImage2(e.target.value)}
           />
           {/* {errors.image2 && <span style={{ color: "red" }}>{errors.image2}</span>} */}
+          {(submitted && "image2" in errors) && <span style={{ color: "red" }}>{errors.image2}</span>}
           <input
             className="image-url-input"
             placeholder="Image URL"
@@ -273,6 +274,7 @@ const CreateSpot = () => {
             onChange={(e) => setImage3(e.target.value)}
           />
           {/* {errors.image3 && <span style={{ color: "red" }}>{errors.image3}</span>} */}
+          {(submitted && "image3" in errors) && <span style={{ color: "red" }}>{errors.image3}</span>}
           <input
             className="image-url-input"
             placeholder="Image URL"
@@ -281,6 +283,7 @@ const CreateSpot = () => {
             onChange={(e) => setImage4(e.target.value)}
           />
           {/* {errors.image4 && <span style={{ color: "red" }}>{errors.image4}</span>} */}
+          {(submitted && "image4" in errors) && <span style={{ color: "red" }}>{errors.image4}</span>}
         </label>
         <button id="submit-create-spot" type="submit">Create Spot</button>
       </form>

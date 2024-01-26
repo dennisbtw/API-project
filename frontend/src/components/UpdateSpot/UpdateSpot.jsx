@@ -20,8 +20,20 @@ const UpdateSpot = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
+      const error = {};
       setSubmitted(true);
-  
+      
+      if(!name) {
+        error.name= "Name is required"
+        setErrors(error)
+        return error
+      }
+      if(description.length < 30) {
+      error.description = "Description 30 or more characters"
+      setErrors(error)
+      return error
+      }
+
       const spotData = {
         address,
         city,
