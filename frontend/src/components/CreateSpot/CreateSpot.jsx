@@ -44,6 +44,7 @@ const CreateSpot = () => {
       setErrors(errors)
       return errors
     }
+    
   //     setErrors(error);
 
   // // Check if there are any errors and return if there are
