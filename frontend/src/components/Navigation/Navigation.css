@@ -1,7 +1,34 @@
 .profile-dropdown {
   position: absolute;
 }
-
 .hidden {
   display: none;
+}
+.navigation-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+#profile-drop-down-container{
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+#profile-drop-down-email{
+  display: flex;
+  flex-direction: column;
+}
+.manage-spots-link{
+  text-decoration: none;
+  color: black;
+}
+.profile-button{
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.create-spot-button{
+  border: none;
+  background-color: white;
+  margin-right: 10px;
 }

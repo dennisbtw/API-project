@@ -1,0 +1,34 @@
+*{
+    font-family: 'Circular', sans-serif;
+}
+
+#delete-container {
+    width: 400px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+}
+.confirm-text{
+    margin-bottom: 10px;
+}
+.delete-button-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.delete-buttons {
+    padding:10px 100px;
+}
+
+#confirm-delete{
+    background-color: #d84228;
+    color: white;
+    margin-bottom: 5px;
+}
+
+#no-delete{
+    background-color: gray;
+    color: white;
+}

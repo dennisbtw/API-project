@@ -113,4 +113,21 @@
     cursor: pointer;
   }
 
-  
+  .price-and-rating-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .price-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .rating-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }

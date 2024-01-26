@@ -7,7 +7,8 @@ function UpdateButtons({spotId}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    function update() {
+    function update(e) {
+        e.stopPropagation(); 
         dispatch(getOneSpotThunk(spotId));
         navigate(`/spots/${spotId}/edit`);
     }

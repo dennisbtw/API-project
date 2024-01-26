@@ -5,7 +5,7 @@ const GET_ALL_SPOTS = 'spots/getSpots'
 const GET_ONE_SPOTS = 'spots/getSpot'
 const CREATE_SPOT = 'spots/createSpot'
 const DELETE_SPOT = 'spots/deleteSpot'
-// const UPDATE_SPOT = 'spots/updateSpot'
+const UPDATE_SPOT = 'spots/updateSpot'
 
 // action creators
 const getAllSpots = (spots) => {
@@ -36,12 +36,12 @@ const deleteSpot = (spotId) => {
   }
 }
 
-// const updatedSpot = (spot) => {
-//   return {
-//     type: UPDATE_SPOT,
-//     spot
-//   }
-// }
+const updatedSpot = (spot) => {
+  return {
+    type: UPDATE_SPOT,
+    spot
+  }
+}
 
 // thunk action creators
 
@@ -131,7 +131,7 @@ export const destroySpot = (spot) => async (dispatch) => {
 }
 
 export const currentSpotThunk = () => async (dispatch) => {
-  const response = await fetch('/api/spots/current', {
+  const response = await csrfFetch('/api/spots/current', {
     method: "GET",
     headers: {
       'Content-Type': 'application/json'
@@ -141,6 +141,21 @@ export const currentSpotThunk = () => async (dispatch) => {
     const spots = await response.json();
     dispatch(getAllSpots(spots))
     return spots;
+  }
+}
+
+export const editSpotThunk = (spotUpdated, spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(spotUpdated)
+  })
+  if(response.ok) {
+    const editSpot = await response.json();
+    dispatch(updatedSpot(editSpot))
+    return editSpot;
   }
 }
 
@@ -168,10 +183,10 @@ const spotsReducer = (state= {}, action) => {
           delete newState[action.spotId]
           return newState
         }
-        // case UPDATE_SPOT: {
-        //   const newState = { ...state, [action.spot.id]: action.spot };
-        //   return newState;
-        // }
+        case UPDATE_SPOT: {
+          const newState = { ...state, [action.spot.id]: action.spot };
+          return newState;
+        }
         default:
             return state;
     }

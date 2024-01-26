@@ -1,0 +1,78 @@
+#create-review-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 5px solid black;
+    width: 500px;
+}
+
+#create-review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#review-text-label {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+}
+#review-text-input {
+    width: 100%;
+    height: 170px;
+    font-size: 18px;
+    margin-bottom: 15px;
+    border: 4px solid black;
+    border-radius: 5px;
+}
+
+#rating-stars {
+    display: flex;
+    font-size: 30px;
+}
+
+#review-submit-disabled {
+    height: 50px;
+    width: 95%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    font-size: 18px;
+    color: gray;
+    border: 3px solid gray;
+    box-shadow: 3px 3px gray;
+}
+
+#rating-stars div {
+    cursor: pointer;
+    font-size: 25px;
+    display: inline-block; 
+    -webkit-text-fill-color: transparent; 
+    -webkit-background-clip: text; 
+}
+
+#review-submit-active {
+  height: 50px;
+  width: 95%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #d84228;
+  color: white;
+  border: 3px solid black;
+  box-shadow: 3px 3px black;
+  font-size: 18px;
+}
+#review-submit-active:hover{
+    cursor: pointer;
+}
+.rating-label {
+    margin-left: 10px;
+}
+
+.star-filled {
+    background-image: linear-gradient(45deg, gold, gold);
+}
+.star-empty {
+    background-image: linear-gradient(45deg, grey, grey);
+}

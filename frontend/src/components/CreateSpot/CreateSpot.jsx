@@ -221,6 +221,8 @@ const CreateSpot = () => {
         <label className="create-border-bottom">
           <h2>Set a base price for your spot</h2>
           <h4>Competitive pricing can help your listing stand out and rank higher in search results.</h4>
+          <div className="price-input-container">
+            
           <span className="money-sign">$ </span>
           <input
             className="price-input"
@@ -229,7 +231,8 @@ const CreateSpot = () => {
             min={1}
             placeholder="Price per night (USD)"
             onChange={(e) => setPrice(e.target.value)}
-          />
+            />
+          </div>
           {"price" in errors && <p style={{ color: "red" }}>{errors.price}</p>}
         </label>
         <label className="create-border-bottom" id="photo-inputs">

@@ -36,26 +36,26 @@ module.exports = {
       {
         spotId: 1,
         userId: 5,
-        review: "Almost perfect",
-        stars: 4
+        review: "Wifi is slow",
+        stars: 3
       }, 
       {
         spotId: 7,
         userId: 6,
-        review: "Almost perfect",
+        review: "Amazing views",
         stars: 4
       },
       {
         spotId: 8,
         userId: 7,
-        review: "Almost perfect",
-        stars: 4
+        review: "It was okay, mid",
+        stars: 2
       },
       {
         spotId: 9,
         userId: 8,
-        review: "Almost perfect",
-        stars: 4
+        review: "Best place I've stayed at in a long time!!",
+        stars: 5
       },
       {
         spotId: 10,
@@ -66,8 +66,8 @@ module.exports = {
       {
         spotId: 6,
         userId: 10,
-        review: "Almost perfect",
-        stars: 4
+        review: "This place is basically haunted!!",
+        stars: 1
       }
     ], {validate: true})
   },
