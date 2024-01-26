@@ -1,3 +1,7 @@
+*{
+  text-decoration: none;
+}
+
 .profile-dropdown {
   position: absolute;
 }
@@ -7,12 +11,15 @@
 .navigation-container {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
+  margin: 10px 20px;
+  align-items: center;
 }
 #profile-drop-down-container{
   border: 1px solid black;
   display: flex;
   flex-direction: column;
+  background: rgba(255,255,255,0.7);
+  padding: 10px;
 }
 #profile-drop-down-email{
   display: flex;
@@ -31,4 +38,35 @@
   border: none;
   background-color: white;
   margin-right: 10px;
+}
+.home-logo-name {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+.nav-logo{
+  width: 30px;
+}
+.napnook-name{
+  color: rgb(41, 154, 41);
+  font-size: 25px;
+  font-weight: bold;
+}
+.profile-logged-in-email{
+  border-bottom: 1px solid black;
+}
+.manage-spots-link{
+  border-bottom: 1px solid black;
+}
+#logout-button-container{
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+}
+.logout-button{
+  border-radius: 15px;
+  background-color: grey;
+  color: white;
+  padding: 5px;
 }

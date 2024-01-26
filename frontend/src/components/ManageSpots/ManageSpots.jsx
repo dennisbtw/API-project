@@ -17,7 +17,6 @@ const ManageSpots = () => {
         dispatch(currentSpotThunk());
     }, [dispatch]);
 
-    // Function to handle navigation, prevents default action if the event is from a button
     const handleTileClick = (e, spotId) => {
         if (e.target.tagName !== 'BUTTON') {
             navigate(`/spots/${spotId}`);
@@ -34,12 +33,14 @@ const ManageSpots = () => {
                         <div className="navigate-spot">
                             <img src={spot.previewImage} alt={spot.name} className="spot-thumbnail navigate-spot" />
                             <div className="spot-info navigate-spot">
-                                <div>{spot.city}, {spot.state}</div>
-                                <div>
-                                    <span role="img" aria-label="star">⭐</span>
-                                    {spot.avgRating > 0 ? spot.avgRating.toFixed(2) : 'New'}
+                                <div className="location-rating-container">
+                                    <div className="location">{spot.city}, {spot.state}</div>
+                                    <div className="rating">
+                                        <span role="img" aria-label="star">⭐</span>
+                                        {spot.avgRating > 0 ? spot.avgRating.toFixed(2) : 'New'}
+                                    </div>
                                 </div>
-                                <span>${spot.price} per night</span>
+                                <span className="price">${spot.price} per night</span>
                             </div>
                         </div>
                         <div className="spot-actions">

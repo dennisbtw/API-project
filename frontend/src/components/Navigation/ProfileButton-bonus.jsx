@@ -58,22 +58,22 @@ function ProfileButton({ user }) {
             <a className='manage-spots-link' href='/spots/current'>Manage Spots</a>
           </div>
           <div id='logout-button-container'>
-            <button id='logout-button' onClick={logout}>Log Out</button>
+            <button className='logout-button' onClick={logout}>Log Out</button>
           </div>
         </div>
         ) : (
-          <>
+          <div id="profile-drop-down-logged-out">
             <OpenModalMenuItem
               itemText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
-            />
+              />
             <OpenModalMenuItem
               itemText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
-            />
-          </>
+              />
+            </div>
         )}
       </ul>
     </>
