@@ -39,7 +39,11 @@ const CreateSpot = () => {
         setErrors(errors)
         return errors
     }
-
+    if(description.length < 30) {
+      error.description = "Description 30 or more characters"
+      setErrors(errors)
+      return errors
+    }
   //     setErrors(error);
 
   // // Check if there are any errors and return if there are
