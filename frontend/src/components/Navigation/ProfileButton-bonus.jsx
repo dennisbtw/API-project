@@ -47,7 +47,7 @@ function ProfileButton({ user }) {
       <button className='profile-button' onClick={toggleMenu}>
         <i className="fas fa-user-circle" />
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <div className={ulClassName} ref={ulRef}>
         {user ? (
           <div id='profile-drop-down-container'>
             <div id='profile-drop-down-email'>
@@ -58,24 +58,24 @@ function ProfileButton({ user }) {
             <a className='manage-spots-link' href='/spots/current'>Manage Spots</a>
           </div>
           <div id='logout-button-container'>
-            <button id='logout-button' onClick={logout}>Log Out</button>
+            <button className='logout-button' onClick={logout}>Log Out</button>
           </div>
         </div>
         ) : (
-          <>
+          <div id="profile-drop-down-logged-out">
             <OpenModalMenuItem
               itemText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
-            />
+              />
             <OpenModalMenuItem
               itemText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
-            />
-          </>
+              />
+            </div>
         )}
-      </ul>
+      </div>
     </>
   );
 }

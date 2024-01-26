@@ -8,6 +8,7 @@ import SpotDetail from './components/SpotDetail/SpotDetail';
 import CreateSpot from './components/CreateSpot/CreateSpot';
 import ManageSpots from './components/ManageSpots/ManageSpots';
 import UpdateSpot from './components/UpdateSpot/UpdateSpot';
+import { Modal } from './context/Modal';
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -20,6 +21,7 @@ function Layout() {
 
   return (
     <>
+      <Modal />
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Outlet />}
     </>
