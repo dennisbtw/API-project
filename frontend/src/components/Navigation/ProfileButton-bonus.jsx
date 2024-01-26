@@ -47,7 +47,7 @@ function ProfileButton({ user }) {
       <button className='profile-button' onClick={toggleMenu}>
         <i className="fas fa-user-circle" />
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <div className={ulClassName} ref={ulRef}>
         {user ? (
           <div id='profile-drop-down-container'>
             <div id='profile-drop-down-email'>
@@ -75,7 +75,7 @@ function ProfileButton({ user }) {
               />
             </div>
         )}
-      </ul>
+      </div>
     </>
   );
 }
