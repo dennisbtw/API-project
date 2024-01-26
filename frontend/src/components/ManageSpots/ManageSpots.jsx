@@ -2,8 +2,7 @@ import DeleteSpot from "../DeleteSpot/DeleteSpot";
 import UpdateButtons from "./UpdateButton";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { currentSpotThunk } from "../../store/spots";
 
@@ -18,9 +17,10 @@ const ManageSpots = () => {
         dispatch(currentSpotThunk());
     }, [dispatch]);
 
-    const navigateToSpot = (e) => {
-        if (e.target.closest('.navigate-spot')) {
-            navigate(`/spots/${spot.id}`);
+    // Function to handle navigation, prevents default action if the event is from a button
+    const handleTileClick = (e, spotId) => {
+        if (e.target.tagName !== 'BUTTON') {
+            navigate(`/spots/${spotId}`);
         }
     }
 
@@ -30,7 +30,7 @@ const ManageSpots = () => {
             <button id="create-spot-button-manage-spot" onClick={() => navigate('/spots/new')}>Create a New Spot</button>
             <div className="spots-list">
                 {userSpots.map(spot => (
-                    <div key={spot.id} className="spot-tile" onClick={navigateToSpot}>
+                    <div key={spot.id} className="spot-tile" onClick={(e) => handleTileClick(e, spot.id)}>
                         <div className="navigate-spot">
                             <img src={spot.previewImage} alt={spot.name} className="spot-thumbnail navigate-spot" />
                             <div className="spot-info navigate-spot">
