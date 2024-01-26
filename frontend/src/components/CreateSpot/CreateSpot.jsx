@@ -219,8 +219,8 @@ const CreateSpot = () => {
             value={name}
             placeholder="Name of your spot"
             onChange={(e) => setName(e.target.value)}
-          />
-          {"name" in errors && <span style={{ color: "red" }}>{errors.name}</span>}
+            />
+            {"name" in errors && <span style={{ color: "red" }}>{errors.name}</span>}
         </label>
         <label className="create-border-bottom">
           <h2>Set a base price for your spot</h2>
@@ -255,9 +255,9 @@ const CreateSpot = () => {
             type="text"
             value={image1}
             onChange={(e) => setImage1(e.target.value)}
-          />
+            />
           {/* {errors.image1 && <span style={{ color: "red" }}>{errors.image1}</span>} */}
-          {(submitted && "image1" in errors) && <span style={{ color: "red" }}>{errors.image1}</span>}
+            {(submitted && "image1" in errors) && <span style={{ color: "red" }}>{errors.image1}</span>}
           <input
             className="image-url-input"
             placeholder="Image URL"
