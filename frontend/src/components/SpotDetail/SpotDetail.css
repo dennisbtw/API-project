@@ -1,27 +1,27 @@
 #spot-detail-main-container {
-    border-top: 2px solid lightgray;
-  }
+  border-top: 2px solid lightgray;
+}
   
-  #spot-detail-heading-info-container {
-    margin-left: 50px;
-    margin-bottom: 20px;
-  }
+#spot-detail-heading-info-container {
+  margin-left: 50px;
+  margin-bottom: 20px;
+}
   
-  .spot-title {
-    font-size: 30px;
-    font-weight: bold;
-  }
+.spot-title {
+  font-size: 30px;
+  font-weight: bold;
+}
   
-  #spot-detail-location-info {
-    font-size: 20px;
-  }
+#spot-detail-location-info {
+  font-size: 20px;
+}
   
-  .spot-detail-all-images-container {
-    display: flex;
-    gap: 5px;
-    margin-left: 50px;
-    margin-bottom: 25px;
-  }
+.spot-detail-all-images-container {
+  display: flex;
+  gap: 5px;
+  margin-left: 50px;
+  margin-bottom: 25px;
+}
   
   .spot-detail-image-container {
     border: 1px solid black;
@@ -131,6 +131,10 @@
     align-items: center;
     gap: 5px;
   }
-  .ratings-bottom{
+.ratings-bottom{
     margin: 10px 40px;
-  }
+}
+
+.post-review-button-container{
+  margin: 10px 40px;
+}
