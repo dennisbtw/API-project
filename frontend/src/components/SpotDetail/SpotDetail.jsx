@@ -114,14 +114,16 @@ const SpotDetail = () => {
                         <h2>⭐ New</h2>
                     )}
                 </div>
+                <div className="post-review-button-container">
                 {(sessionUser && !rendered && spot.Owner.id !== sessionUser.id) && (
                     <OpenModalButton
-                        buttonText="Post Your Review"
-                        buttonId="postYourReviewButton"
-                        modalComponent={<CreateReview spotId={spotId} setRendered={setRendered} />}
+                    buttonText="Post Your Review"
+                    buttonId="postYourReviewButton"
+                    modalComponent={<CreateReview spotId={spotId} setRendered={setRendered} />}
                     />
-                )}
-                <div>
+                    )}
+                </div>
+                <div className="spots-reviews-button-bottom">
                     <SpotReviews spot={spot} rendered={rendered} />
                 </div>
             </section>
