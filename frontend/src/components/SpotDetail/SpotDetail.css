@@ -131,3 +131,6 @@
     align-items: center;
     gap: 5px;
   }
+  .ratings-bottom{
+    margin: 10px 40px;
+  }

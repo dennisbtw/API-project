@@ -107,7 +107,7 @@ const SpotDetail = () => {
             <section id="spotDetailReviewSection">
                 <div>
                     {numReviews > 0 ? (
-                        <h2>
+                        <h2 className="ratings-bottom">
                             ⭐️ {avgRating.toFixed(2)} · {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
                         </h2>
                     ) : (
