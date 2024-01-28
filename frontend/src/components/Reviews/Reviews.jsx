@@ -4,6 +4,7 @@ import { getReviewsThunk } from "../../store/review";
 import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteReview from "../DeleteReview/DeleteReview";
+import './Reviews.css'
 
 const SpotReviews = () => {
     const dispatch = useDispatch();
@@ -40,20 +41,22 @@ const SpotReviews = () => {
 
     return (
         <section>
-            {reviewsForSpot.map((review) => (
-                <div key={review.id}>
-                    <h3 className="review-name">{review.User?.firstName}</h3>
-                    <p className="review-dates">{month(review.createdAt)} {year(review.createdAt)}</p>
-                    <p className="review-comments">{review.review}</p>
-                    {sessionUser?.id === review.User?.id && (
-                        <OpenModalButton
-                            buttonText='Delete'
-                            className='delete-button'
-                            modalComponent={<DeleteReview reviewId={review.id}/>}
-                        />
-                    )}
-                </div>
-            ))}
+            <div id="reviews-container">
+                {reviewsForSpot.map((review) => (
+                    <div key={review.id} className="review">
+                        <h3 className="review-name">{review.User?.firstName}</h3>
+                        <p className="review-dates">{month(review.createdAt)} {year(review.createdAt)}</p>
+                        <p className="review-comments">{review.review}</p>
+                        {sessionUser?.id === review.User?.id && (
+                            <OpenModalButton
+                                buttonText='Delete'
+                                className='delete-button'
+                                modalComponent={<DeleteReview reviewId={review.id}/>}
+                            />
+                        )}
+                    </div>
+                ))}
+            </div>
         </section>
     );
 };
