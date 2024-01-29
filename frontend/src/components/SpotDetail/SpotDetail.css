@@ -23,30 +23,30 @@
   margin-bottom: 25px;
 }
   
-  .spot-detail-image-container {
-    border: 1px solid black;
-    width: 48%;
-    height: 550px;
-    border-radius: 10px 0px 0px 10px;
+.spot-detail-image-container {
+  border: 1px solid black;
+  width: 48%;
+  height: 550px;
+  border-radius: 10px 0px 0px 10px;
   }
   
-  .spot-detail-main-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px 0px 0px 10px;
-  }
+.spot-detail-main-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 0px 0px 10px;
+}
   
-  .small-images-container {
-    height: 400px;
-    width: 48%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
-  }
+.small-images-container {
+  height: 400px;
+  width: 48%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
   
-  .indiv-small-img-boxes {
-    height: 273px;
-  }
+.indiv-small-img-boxes {
+  height: 273px;
+}
   
   .spot-detail-small-image {
     width: 100%;
@@ -131,10 +131,10 @@
     align-items: center;
     gap: 5px;
   }
-.ratings-bottom{
-    margin: 10px 40px;
-}
 
 .post-review-button-container{
+  margin: 10px 40px;
+}
+#spotDetailReviewSection{
   margin: 10px 40px;
 }
